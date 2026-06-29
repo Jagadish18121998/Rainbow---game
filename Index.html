@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Rainbow Game</title>
+<style>
+body{
+font-family:Arial;
+background:linear-gradient(skyblue,white);
+text-align:center;
+padding:20px;
+}
+h1{color:darkblue;}
+#card{
+background:white;
+width:80%;
+max-width:600px;
+margin:auto;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px gray;
+}
+button{
+padding:10px 20px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:orange;
+cursor:pointer;
+}
+button:hover{
+background:green;
+color:white;
+}
+#score{
+font-size:24px;
+color:blue;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌈 THE RAINBOW GAME 🌈</h1>
+
+<div id="card">
+
+<h2 id="question"></h2>
+
+<div id="answers"></div>
+
+<h2 id="score"></h2>
+
+</div>
+
+<script>
+
+const quiz=[
+
+{
+q:"1. Where do boats sail?",
+options:["Sky","River","Mountain","Forest"],
+answer:1
+},
+
+{
+q:"2. Where do ships sail?",
+options:["Sea","Road","Sky","Desert"],
+answer:0
+},
+
+{
+q:"3. What sails across the sky?",
+options:["Train","Clouds","Car","Bridge"],
+answer:1
+},
+
+{
+q:"4. What is the 'bow' in the poem?",
+options:["Arrow","Rainbow","Boat","Tree"],
+answer:1
+},
+
+{
+q:"5. Which is a natural thing?",
+options:["Bridge","Rainbow","Ship","Boat"],
+answer:1
+},
+
+{
+q:"6. The rainbow connects _____.",
+options:["Earth and Sky","Sea and River","Road and House","Mountain and Tree"],
+answer:0
+},
+
+{
+q:"7. The poet thinks the rainbow is...",
+options:["Ugly","Ordinary","Most Beautiful","Small"],
+answer:2
+},
+
+{
+q:"8. Bridges are built by...",
+options:["Nature","Humans","Birds","Clouds"],
+answer:1
+},
+
+{
+q:"9. Clouds sail in the...",
+options:["River","Sea","Sky","Road"],
+answer:2
+},
+
+{
+q:"10. What is the main message of the poem?",
+options:[
+"Nature is beautiful",
+"Ships are best",
+"Roads are beautiful",
+"Boats are colourful"],
+answer:0
+}
+
+];
+
+let current=0;
+let score=0;
+
+function loadQuestion(){
+
+if(current==quiz.length){
+
+document.getElementById("card").innerHTML=
+"<h1>🎉 Game Over 🎉</h1><h2>Your Score: "
++score+" / "+quiz.length+
+"</h2>";
+
+if(score==10)
+document.getElementById("card").innerHTML+="<h2>🏆 Excellent!</h2>";
+
+else if(score>=8)
+document.getElementById("card").innerHTML+="<h2>🌟 Very Good!</h2>";
+
+else if(score>=5)
+document.getElementById("card").innerHTML+="<h2>👍 Good Job!</h2>";
+
+else
+document.getElementById("card").innerHTML+="<h2>😊 Keep Practising!</h2>";
+
+return;
+}
+
+document.getElementById("question").innerHTML=quiz[current].q;
+
+let html="";
+
+quiz[current].options.forEach((opt,index)=>{
+html+="<button onclick='check("+index+")'>"+opt+"</button><br>";
+});
+
+document.getElementById("answers").innerHTML=html;
+
+}
+
+function check(choice){
+
+if(choice==quiz[current].answer){
+score++;
+}
+
+current++;
+
+loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
